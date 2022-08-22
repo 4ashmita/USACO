@@ -1,0 +1,19 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int[] mooZ = new int[7];
+    for(int i = 0; i < 7; i++){
+      mooZ[i] = scan.nextInt();
+    }
+    Arrays.sort(mooZ);
+    int a;
+    int b;
+    int c;
+    a = mooZ[0];
+    b = mooZ[1];
+    c = mooZ[6] - (a+b);
+    System.out.println(a + " " + b + " " + c);
+  }
+}
