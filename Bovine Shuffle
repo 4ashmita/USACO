@@ -1,0 +1,31 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] shuffle = new int[N];
+    int[] order = new int[N];
+    for(int i = 0; i < N; i++){
+      shuffle[i] = scan.nextInt();
+    }
+     for(int i = 0; i < N; i++){
+      order[i] = scan.nextInt();
+    }
+    int[] newO = new int[N+1];
+    for(int i = 0; i < N; i++){
+      newO[shuffle[i]] = i;
+    }
+    int[] original  = new int[N+1];
+    for(int finalPos = 1; finalPos <= N; finalPos ++){
+      int current = finalPos;
+      for(int i = 0; i < 3; i++){
+        current = newO[current];
+      }
+      original[current] = order[current];
+    }
+    for(int i: original){
+      System.out.println(original);
+    }
+  }
+}
