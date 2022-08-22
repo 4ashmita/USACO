@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int A = scan.nextInt();
+    int B = scan.nextInt();
+    int C = scan.nextInt();
+    int D = scan.nextInt();
+    int distance_AB = B-A;
+    int distance_CD = D-C;
+    int total = distance_AB + distance_CD; 
+    int overlap;
+
+    if(A < C && A < D && C < B && D < B){
+      overlap = distance_CD;
+    }
+    else if(A < D && D < B){
+      overlap = D-A;
+    }
+    else if(A == C && B == D){
+      overlap = distance_AB;
+    }
+    else if(A < C && C < B){
+      overlap = B - C;
+    }
+    else if(C < A && C < B && A < D && B < D){
+      overlap = distance_AB;
+    }
+    else{
+      overlap = 0;
+    }
+    total -= overlap;
+    System.out.println(total);
+  }
+}
