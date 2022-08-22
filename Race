@@ -1,0 +1,32 @@
+import java.util.*;
+
+class Main {
+  public static int solve(int dist, int minspeed){
+    int hrtravel = 0;
+    int rhtravel = 0;
+    int time = 0;
+    for(int curspeed = 1 ;; curspeed++){
+      hrtravel += curspeed;
+      time += 1;
+      if(hrtravel + rhtravel >= dist){
+        return time;
+      }
+      if(curspeed >= minspeed){
+        rhtravel += curspeed;
+        time += 1;
+        if(hrtravel + rhtravel >= dist){
+          return time;
+        }
+      }
+    }
+  }
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int K = scan.nextInt();
+    int N = scan.nextInt();
+    for(int i = 0; i < N; i++){
+      int minspeed = scan.nextInt();
+      System.out.println(solve(K, minspeed));
+    }
+  }
+}
