@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    String dummy = scan.next();
+    String mailboxes = scan.next();
+    for(int guess = 1; guess < N; guess++){
+      boolean good = true;
+      for(int i = 0; i+guess < N; i++){
+        String String1 = "";
+        String String2 = "";
+        for(int j = 0; j < i; j++){
+          for(int k = j; k > guess; k--){
+            String1 += mailboxes.charAt(k);
+          }
+          for(int h = i; h > guess; h--){
+            String2 += mailboxes.charAt(h);
+          }
+          System.out.println(String1 + " " + String2);
+          if(String2.equals(String1)){
+            good = false;
+          }
+          String1 = "";
+        }
+        String2 = "";
+      }
+      if(good == true){
+        System.out.println(guess);
+        break;
+      }
+    }
+    
+  }
+}
