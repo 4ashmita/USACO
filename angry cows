@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] positions = new int[N];
+    for(int i = 0; i < N; i++){
+      positions[i] = scan.nextInt();
+    
+    }
+    boolean miss = false;
+    Arrays.sort(positions);
+    int maxhit = 0;
+    for(int i = 0; i < N; i++){
+      int hit = 0;
+      int counter = 0;
+      int f = 0;
+      while(miss == false){
+        int up = positions[i] + hit;
+        int down = positions[i] - hit;
+        for(int j = 0; j < N; j++){
+          if(up == positions[j]){
+            f += 1;
+            miss = false;
+          }
+          if(down == positions[j] && up != down){
+            f += 1;
+            miss = false;
+          }
+        }
+        hit +=1;
+        if(f == 0){
+          miss = true;
+        }
+        counter += f;
+        f = 0;
+      }
+      if(counter > maxhit){
+        maxhit = counter;
+      }
+      counter = 0;
+      miss = false;
+    }
+    System.out.println(maxhit);
+  }
+}
