@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Main {
+  public static boolean positions(int a, int b, int[][] ranks, int session, int N){
+    int apos = 0;
+    int bpos = 0;
+    for(int i = 0; i < N; i++){
+      if(ranks[session][i] == a){
+        apos = i;
+      }
+      if(ranks[session][i] == b){
+        bpos = i;
+      }
+    }
+    return apos<bpos;
+  }
+  public static int better(int a, int b, int[][] ranks, int N, int K){
+    int total = 0;
+    for(int s = 0; s < K; s++){
+      if(positions(a,b,ranks,s,N) == true){
+        total += 1;
+      }
+    }
+    return total;
+  }
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int K = scan.nextInt();
+    int N = scan.nextInt();
+    int[][] rankings = new int[K][N];
+    for(int i = 0; i < K; i++){
+      for(int j = 0; j < N; j++){
+        rankings[i][j] = scan.nextInt();
+      }
+    }
+    int counter = 0;
+    for(int a = 0; a <= N; a++){
+      for(int b = 0; b <= N; b++){
+        if(better(a,b,rankings,N,K) == K){
+          counter++;
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
