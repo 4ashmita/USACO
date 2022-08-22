@@ -1,0 +1,46 @@
+import java.util.*;
+
+class Main {
+  public static boolean better(int a, int b, int session, int[][] data, int N){
+    int apos = 0;
+    int bpos = 0;
+    for(int i = 0; i < N; i++){
+      if(data[session][i] == a){
+        apos = i;
+      }
+      if(data[session][i] == b){
+        bpos = i;
+      }
+    }
+    return apos < bpos;
+  }
+  public static int Nbet(int a, int b, int[][] data, int N,int K){
+    int total = 0;
+    for(int session = 0; session < K; session++){
+      if(better(a,b,session,data,N)){
+        total++;
+      }
+    }
+    return total;
+  }
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int K = scan.nextInt();
+    int N = scan.nextInt();
+    int[][] rankings = new int[K][N];
+    for(int i = 0; i < K; i++){
+      for(int j = 0; j < N; j++){
+        rankings[i][j] = scan.nextInt();
+      }
+    }
+    int answer = 0;
+    for(int a = 1; a <= N; a++){
+      for(int b = 1; b <= N; b++){
+        if(Nbet(a,b,rankings,N,K) == K){
+          answer += 1;
+        }
+      }
+    }
+    System.out.println(answer);
+  }
+}
