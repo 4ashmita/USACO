@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int brozeStart = scan.nextInt();
+    int bronzeEnd = scan.nextInt();
+    int silverStart = scan.nextInt();
+    int silverEnd = scan.nextInt();
+    int goldStart = scan.nextInt();
+    int goldEnd = scan.nextInt();
+    int platStart = scan.nextInt();
+    int platEnd = scan.nextInt();
+    int silverPromo = 0;
+    int goldPromo = 0;
+    int platPromo = 0;
+
+    if(platEnd > platStart){
+      silverPromo  = platEnd - platStart;
+      goldPromo  = platEnd - platStart;
+      platPromo  = platEnd - platStart;
+    }
+    silverPromo += silverEnd-silverStart;
+    goldPromo += goldEnd - goldStart;
+    System.out.println(silverPromo);
+    System.out.println(goldPromo);
+    System.out.println(platPromo);
+  }
+}
