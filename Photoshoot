@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] b = new int[100000];
+    int[] d = new int[100000];
+    int[] ans = new int[100000];
+    boolean[] used = new boolean[100000];
+    for(int i = 0; i < N-1; i++){
+      b[i] = scan.nextInt();
+    }
+    for(int i = 2; i < N; i++){
+      d[i] = b[i-1] - b[i-2];
+    }
+    for(int a = 1; a <= N; a++){
+      ans[0] = a;
+      ans[1] = b[0] - a;
+      for(int i = 2; i < N; i++){
+        ans[i] = ans[i-2] + d[i];
+      }
+      for(int j = 1; j <= N; j++){
+        used[j] = false;
+        
+      }
+      boolean bad = false;
+      for(int k = 0; k < N; k++){
+        if(ans[k] <= 0|| used[ans[k]] || ans[k] > N){
+          bad = true;
+          break;
+        }
+        used[ans[k]] = true;
+      }
+      if(!bad){
+        for(int m = 0; m < N; m++){
+          System.out.println(ans[m]);
+        }
+      }
+    }
+  }
+}
