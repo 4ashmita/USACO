@@ -1,0 +1,39 @@
+import java.util.*;
+import java.lang.Math;
+
+class Main {
+  public static int area(int x1, int y1, int x2, int y2){
+    return (x2-x1)*(y2-y1);
+  }
+  public static int visibleArea(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4){
+    int visible = area(x1,y1,x2,y2);
+    int leftX = Math.max(x1,x3);
+    int rightX = Math.min(x2,x4);
+    int bottomY = Math.max(y1,y3);
+    int topY = Math.min(y2,y4);
+    if(leftX < rightX && bottomY < topY){
+      visible -= area(leftX, bottomY, rightX, topY);
+      return visible;
+    }
+  }
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int x1 = scan.nextInt();
+    int y1 = scan.nextInt();
+    int x2 = scan.nextInt();
+    int y2 = scan.nextInt();
+    
+    int x3 = scan.nextInt();
+    int y3 = scan.nextInt();
+    int x4 = scan.nextInt();
+    int y4 = scan.nextInt();
+
+    int x5 = scan.nextInt();
+    int y5 = scan.nextInt();
+    int x6 = scan.nextInt();
+    int y6 = scan.nextInt();
+
+    int combined = visibleArea(x1,y1,x2,y2,x5,y5,x6,y6) + visibleArea(x3,y3,x4,y4,x5,y5,x6,y6);
+    System.out.println(combined);
+  }
+}
