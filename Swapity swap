@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int K = scan.nextInt();
+    int A1 = scan.nextInt();
+    int A2 = scan.nextInt();
+    int B1 = scan.nextInt();
+    int B2 = scan.nextInt();
+    int[] cows = new int[N];
+    for(int i = 0; i < N; i++){
+      cows[i] = i+1;
+    }
+    A2 -= 1;
+    A1 -= 1;
+    B2 -= 1;
+    B1 -= 1;
+    int[] ans = new int[N];
+    for(int i = 0; i < A1; i++){
+      ans[i] = cows[i];
+    }
+    for(int i = A2+1; i < N; i++){
+      ans[i] = cows[i];
+    }
+    int Acounter = A1;
+    int Bcounter = B1;
+
+    for(int i = 0; i < K; i++){
+      Acounter = A1;
+      Bcounter = B1;
+      for(int k = A2; k >= A1; k--){
+        ans[Acounter] = cows[k];
+        Acounter += 1;
+      }
+      for(int j = 0; j < N; j++){
+        cows[j] = ans[j];
+      }
+      for(int b = B2; b >= B1; b--){
+        ans[Bcounter] = cows[b];
+        Bcounter += 1;
+      }
+      for(int g = 0; g < N; g++){
+        cows[g] = ans[g];
+      }
+    }
+
+    for(int i: ans){
+      System.out.println(i);
+    }
+  }
+}
