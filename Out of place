@@ -1,0 +1,25 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] line = new int[N];
+    int[] sorted = new int[N];
+    for(int i = 0; i < N; i++){
+      line[i] = scan.nextInt();
+      sorted[i] = line[i];
+    }
+    Arrays.sort(sorted);
+    int swaps = -1;
+    for(int i = 0; i < N; i++){
+      if(sorted[i] != line[i]){
+        swaps += 1; 
+      }
+    }
+    if(0 > swaps){
+      swaps = 0;
+    }
+    System.out.println(swaps);
+  }
+}
