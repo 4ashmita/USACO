@@ -1,0 +1,27 @@
+import java.util.*;
+import java.lang.Math;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] times = new int[N];
+    for(int i = 0; i < N; i++){
+      int a = scan.nextInt();
+      int b = scan.nextInt();
+      times[i] = b-a;
+    }
+    int maximum = 0;
+    int counter = 0;
+    for(int i = 0; i < N; i++){
+      for(int j = 0; j < N; j++){
+        if(j != i){
+          counter += times[j];
+        }
+      }
+      maximum = Math.max(counter,maximum);
+      counter = 0;
+    }
+    System.out.println(maximum);
+  }
+}
