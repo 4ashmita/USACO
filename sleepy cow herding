@@ -1,0 +1,41 @@
+import java.util.*;
+import java.lang.Math;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int Bessie = scan.nextInt();
+    int Elsie = scan.nextInt();
+    int Mildred = scan.nextInt();
+    int minimum = 100000;
+    int maximum = 0;
+    int b;
+    if(Bessie > Elsie){
+      b = Bessie;
+      Bessie = Elsie;
+      Elsie = Bessie;
+      
+    }
+    if(Elsie > Mildred){
+      b = Elsie;
+      Elsie = Mildred;
+      Mildred = Elsie;
+    }
+    if(Bessie > Elsie){
+      b = Bessie;
+      Bessie = Elsie;
+      Elsie = Bessie;
+      
+    }
+    if(Mildred == Bessie + 2){
+      System.out.println('0');
+    }
+    else if(Elsie == Bessie+2 || Mildred == Elsie + 2){
+      System.out.println("1");
+    }
+    else{
+      System.out.println("2");
+    }
+    System.out.println(Math.max(Elsie-Bessie),(Mildred-Elsie)-1);
+  }
+}
