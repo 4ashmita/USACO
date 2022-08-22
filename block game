@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    String word1;
+    String word2;
+    int[] alphabet = new int[26];
+    int[] temp = new int[26];
+    String dummy = scan.nextLine();
+    
+    for(int i = 0; i < N; i++){
+      for(int j = 0; j < 26; j++){
+        temp[j] = 0;
+      }
+      word1 = scan.nextLine();
+      word2 = scan.nextLine();
+      for(int k = 0; k < word1.length(); k++){
+        char letter = word1.charAt(k);
+        int pos = letter;
+        temp[pos-97] += 1;
+      }
+      for(int h = 0; h < word2.length(); h++){
+        char letter2 = word2.charAt(h);
+        int pos2 = letter2;
+        temp[pos2-97] += 1;
+      }
+      for(int l = 0; l < 26; l++){
+        if(temp[l] > 1){
+          temp[l] -= 1;
+        }
+        alphabet[l] += temp[l];
+      }
+    }
+    
+    for(int i:alphabet){
+      System.out.println(i);
+    }
+  }
+}
