@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int A = scan.nextInt();
+    int B = scan.nextInt();
+    int N = scan.nextInt();
+    int cost;
+    int stops;
+    int min = 0;
+    for(int i = 0; i < N; i++){
+      cost = scan.nextInt();
+      stops = scan.nextInt();
+      int[] cities = new int[stops];
+      for(int j = 0; j < stops; j++){
+        cities[j] = scan.nextInt();
+      }
+      for(int l = 0; l < stops; l++){
+        if(cities[l] == A){
+          for(int k = 0; k < stops; k++){
+            if(cities[k] == B && k > l){
+              if(min == 0){
+                min = cost;
+              }
+              else{
+                if(cost < min){
+                  min = cost;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    if(min == 0){
+      min = -1;
+    }
+    System.out.println(min);
+  }
+}
