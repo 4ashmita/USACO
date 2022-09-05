@@ -1,23 +1,47 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    for(int i = 0; i < N; i++){
-      String path = scan.next();
-      for(int j = 0; j < path.length(); j++){
-        if(j+2 < path.length()){
-          if((path.charAt(j) == 'N' && path.charAt(j+1) == 'E') || (path.charAt(j) == 'S' && path.charAt(j+1) == 'W')){
-            System.out.println("CW");
-            break;
-          }
-          else if((path.charAt(j) == 'N' && path.charAt(j+1) == 'W') || (path.charAt(j) == 'S' && path.charAt(j+1) == 'E')){
-            System.out.println("CCW");
-            break;
-          }
+class clockwise {
+    public static void main(String[] args) throws FileNotFoundException {
+        for (int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("prob3_bronze_feb21/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            int N = Integer.valueOf(sc.nextLine());
+            for (int i = 0; i < N; i++) {
+                String path = sc.nextLine();
+                for (int j = 0; j < path.length(); j++) {
+                    file = new File("prob3_bronze_feb21/" + outputFile);
+                    sc = new Scanner(file);
+                    String test = sc.nextLine();
+                    if (j + 2 < path.length()) {
+                        if ((path.charAt(j) == 'N' && path.charAt(j + 1) == 'E') || (path.charAt(j) == 'S' && path.charAt(j + 1) == 'W')) {
+                            if(test.equals("CW")){
+                                System.out.println("PASS" + l);
+                            }
+                            else{
+                                System.out.println("FAIL" + l);
+                                System.out.println(test);
+                            }
+                            System.out.println("CW");
+                            break;
+                        } else if ((path.charAt(j) == 'N' && path.charAt(j + 1) == 'W') || (path.charAt(j) == 'S' && path.charAt(j + 1) == 'E')) {
+                            if(test.equals("CCW")){
+                                System.out.println("PASS" + l);
+                            }
+                            else{
+                                System.out.println("FAIL" + l);
+                                System.out.println(test);
+                            }
+                            System.out.println("CCW" );
+                            break;
+                        }
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
