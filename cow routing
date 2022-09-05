@@ -1,41 +1,62 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int A = scan.nextInt();
-    int B = scan.nextInt();
-    int N = scan.nextInt();
-    int cost;
-    int stops;
-    int min = 0;
-    for(int i = 0; i < N; i++){
-      cost = scan.nextInt();
-      stops = scan.nextInt();
-      int[] cities = new int[stops];
-      for(int j = 0; j < stops; j++){
-        cities[j] = scan.nextInt();
-      }
-      for(int l = 0; l < stops; l++){
-        if(cities[l] == A){
-          for(int k = 0; k < stops; k++){
-            if(cities[k] == B && k > l){
-              if(min == 0){
-                min = cost;
-              }
-              else{
-                if(cost < min){
-                  min = cost;
+class cowsroute {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int q = 1; q <= 10; q++) {
+            String inputFile = String.valueOf(q) + "" + ".in";
+            String outputFile = String.valueOf(q) + "" + ".out";
+            File file = new File("cowroute_bronze/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            Scanner scan = new Scanner(System.in);
+            String[] p = sc.nextLine().split(" ");
+            int A = Integer.parseInt(p[0]);
+            int B = Integer.parseInt(p[1]);
+            int N = Integer.parseInt(p[2]);
+            int cost;
+            int stops;
+            int min = 0;
+            for (int i = 0; i < N; i++) {
+                String[] g = sc.nextLine().split(" ");
+                cost = Integer.parseInt(g[0]);
+                stops = Integer.parseInt(g[1]);
+                int[] cities = new int[stops];
+                String[] cit = sc.nextLine().split(" ");;
+                for (int j = 0; j < stops; j++) {
+                    cities[j] = Integer.parseInt(cit[j]);
                 }
-              }
+                for (int l = 0; l < stops; l++) {
+                    if (cities[l] == A) {
+                        for (int k = 0; k < stops; k++) {
+                            if (cities[k] == B && k > l) {
+                                if (min == 0) {
+                                    min = cost;
+                                } else {
+                                    if (cost < min) {
+                                        min = cost;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
-          }
+            if (min == 0) {
+                min = -1;
+            }
+            file = new File("cowroute_bronze/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            if(test1 == min){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(min);
+            }
         }
-      }
     }
-    if(min == 0){
-      min = -1;
-    }
-    System.out.println(min);
-  }
 }
