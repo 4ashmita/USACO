@@ -16,7 +16,7 @@ class last {
         for(int l = 1; l <= 10; l++) {
             String inputFile = String.valueOf(l) + "" + ".in";
             String outputFile = String.valueOf(l) + "" + ".out";
-            File file = new File("shell_bronze_jan19/" + inputFile);
+            File file = new File("notlast_bronze_jan17/" + inputFile);
             Scanner sc = new Scanner(file);
             sc.useDelimiter("\\z");
             String[] cowsList = {"Bessie", "Elsie", "Daisy", "Gertie", "Annabelle", "Maggie", "Henrietta"};
@@ -42,14 +42,26 @@ class last {
                     break;
                 }
             }
+            String answer = "";
+            if (next == 0) {
+                answer = "Tie";
+            }
             for (int i = 0; i < 7; i++) {
                 if (Milk[i] == next) {
-                    System.out.println(cowsList[i]);
+                    answer = cowsList[i];
                     break;
                 }
             }
-            if (next == 0) {
-                System.out.println("tie");
+            file = new File("notlast_bronze_jan17/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            if(test.equals(answer)){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(test);
+                System.out.println(answer);
             }
         }
     }
