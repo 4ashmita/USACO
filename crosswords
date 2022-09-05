@@ -1,51 +1,58 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    int M = scan.nextInt();
-    char[][] crossword = new char[N][M];
-    String s;
-    for(int i = 0; i < N; i++){
-      s = scan.next();
-      for(int j = 0; j < M; j++){
-        crossword[i][j] = s.charAt(j);
-      }
-    }
-    int counter = 0;
-    for(int i = 0; i < N; i++){
-      for(int j = 0; j < M ; j++){
-        if(crossword[i][j] == '#' || crossword[i][j] == '*'){
-          continue;
-        }
-        else if(crossword[i][j] =='.'){
-          //System.out.println("kkk");
-          if(j+2 < M && (j == 0 || crossword[i][j-1] == '#')){
-            //System.out.println("j+2");
-            if(crossword[i][j+1] =='.' && crossword[i][j+2] == '.'){
-              counter += 1;
-              crossword[i][j] = '*';
+class crosswords {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("shell_bronze_jan19/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            Scanner scan = new Scanner(System.in);
+            String[] B = sc.nextLine().split(" ");
+            int N = Integer.parseInt(B[0]);
+            int M = Integer.parseInt(B[1]);
+            char[][] crossword = new char[N][M];
+            String s = sc.nextLine();
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    crossword[i][j] = s.charAt(j);
+                }
             }
-          }
-          else if(i+2 < N && (i == 0 || crossword[i-1][j] == '#')){
-            if(crossword[i+1][j] =='.' && crossword[i+2][j] == '.'){
-              counter += 1;
-              crossword[i][j] = '*';
+            int counter = 0;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    if (crossword[i][j] == '#' || crossword[i][j] == '*') {
+                        continue;
+                    } else if (crossword[i][j] == '.') {
+                        //System.out.println("kkk");
+                        if (j + 2 < M && (j == 0 || crossword[i][j - 1] == '#')) {
+                            //System.out.println("j+2");
+                            if (crossword[i][j + 1] == '.' && crossword[i][j + 2] == '.') {
+                                counter += 1;
+                                crossword[i][j] = '*';
+                            }
+                        } else if (i + 2 < N && (i == 0 || crossword[i - 1][j] == '#')) {
+                            if (crossword[i + 1][j] == '.' && crossword[i + 2][j] == '.') {
+                                counter += 1;
+                                crossword[i][j] = '*';
+                            }
+                        }
+                    }
+                }
             }
-          }
+            System.out.println(counter);
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    if (crossword[i][j] == '*') {
+                        int k = i + 1;
+                        int o = j + 1;
+                        System.out.println(k + " " + o);
+                    }
+                }
+            }
         }
-      }
     }
-    System.out.println(counter);
-    for(int i = 0; i < N; i++){
-      for(int j = 0; j < M; j++){
-        if(crossword[i][j] == '*'){
-          int k = i+1;
-          int l = j+1;
-          System.out.println(k + " " + l);
-        }
-      }
-    }
-  }
 }
