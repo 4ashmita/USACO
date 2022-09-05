@@ -1,47 +1,67 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    int[] positions = new int[N];
-    for(int i = 0; i < N; i++){
-      positions[i] = scan.nextInt();
-    
-    }
-    boolean miss = false;
-    Arrays.sort(positions);
-    int maxhit = 0;
-    for(int i = 0; i < N; i++){
-      int hit = 0;
-      int counter = 0;
-      int f = 0;
-      while(miss == false){
-        int up = positions[i] + hit;
-        int down = positions[i] - hit;
-        for(int j = 0; j < N; j++){
-          if(up == positions[j]){
-            f += 1;
-            miss = false;
-          }
-          if(down == positions[j] && up != down){
-            f += 1;
-            miss = false;
-          }
+class angry {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("angry_bronze_jan16/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+
+            int N = Integer.parseInt(sc.nextLine());
+            int[] positions = new int[N];
+            for (int i = 0; i < N; i++) {
+                positions[i] = Integer.parseInt(sc.nextLine());
+
+            }
+            boolean miss = false;
+            Arrays.sort(positions);
+            int maxhit = 0;
+            for (int i = 0; i < N; i++) {
+                int hit = 0;
+                int counter = 0;
+                int f = 0;
+                while (miss == false) {
+                    int up = positions[i] + hit;
+                    int down = positions[i] - hit;
+                    for (int j = 0; j < N; j++) {
+                        if (up == positions[j]) {
+                            f += 1;
+                            miss = false;
+                        }
+                        if (down == positions[j] && up != down) {
+                            f += 1;
+                            miss = false;
+                        }
+                    }
+                    hit += 1;
+                    if (f == 0) {
+                        miss = true;
+                    }
+                    counter += f;
+                    f = 0;
+                }
+                if (counter > maxhit) {
+                    maxhit = counter;
+                }
+                counter = 0;
+                miss = false;
+            }
+            file = new File("angry_bronze_jan16/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            if(test1 == maxhit){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(maxhit);
+                System.out.println(test1);
+            }
         }
-        hit +=1;
-        if(f == 0){
-          miss = true;
-        }
-        counter += f;
-        f = 0;
-      }
-      if(counter > maxhit){
-        maxhit = counter;
-      }
-      counter = 0;
-      miss = false;
     }
-    System.out.println(maxhit);
-  }
 }
