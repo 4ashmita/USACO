@@ -1,26 +1,44 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.lang.Math;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int start = scan.nextInt();
-    int end = scan.nextInt();
-    int x = scan.nextInt();
-    int y = scan.nextInt();
-    int counter = Math.abs(start-end);
-    if(counter < (Math.abs(start-x)+ Math.abs(end-y))){
-      counter = counter;
+class teleport {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("teleport_bronze_feb18/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            String[] b = sc.nextLine().split(" ");
+            int start = Integer.parseInt(b[0]);
+            int end = Integer.parseInt(b[1]);
+            int x = Integer.parseInt(b[2]);
+            int y = Integer.parseInt(b[3]);
+            int counter = Math.abs(start - end);
+            if (counter < (Math.abs(start - x) + Math.abs(end - y))) {
+                counter = counter;
+            } else {
+                counter = Math.abs(start - x) + Math.abs(end - y);
+            }
+            if (counter < (Math.abs(start - y) + Math.abs(end - x))) {
+                counter = counter;
+            } else {
+                counter = Math.abs(start - y) + Math.abs(end - x);
+            }
+            file = new File("teleport_bronze_feb18/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            if(test1 == counter){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(counter);
+                System.out.println(test1);
+            }
+        }
     }
-    else{
-      counter = Math.abs(start-x)+ Math.abs(end-y);
-    }
-    if(counter < (Math.abs(start-y)+ Math.abs(end-x))){
-      counter = counter;
-    }
-    else{
-      counter = Math.abs(start-y)+ Math.abs(end-x);
-    }
-    System.out.println(counter);
-  }
 }
