@@ -1,57 +1,64 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int c1 = scan.nextInt();
-    int m1 = scan.nextInt();
-    int c2 = scan.nextInt();
-    int m2 = scan.nextInt();
-    int c3 = scan.nextInt();
-    int m3 = scan.nextInt();
-    int counter = 1;
-    
-    for(int i = 0; i < 100; i++){
-      if(counter == 1){
-        for(int s = 0; s < c2; s++){
-          if(m1 != 0){
-            m2 += 1;
-            m1 -= 1;
-          }
-          else{
-            break;
-          }
+class mixmilk {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("shell_bronze_jan19/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            Scanner scan = new Scanner(System.in);
+            String[] s = sc.nextLine().split(" ");
+            int c1 = Integer.parseInt(s[0]);
+            int m1 = Integer.parseInt(s[1]);
+            s = sc.nextLine().split(" ");
+            int c2 = Integer.parseInt(s[0]);
+            int m2 = Integer.parseInt(s[1]);
+            s = sc.nextLine().split(" ");
+            int c3 = Integer.parseInt(s[0]);
+            int m3 = Integer.parseInt(s[1]);
+            int counter = 1;
+
+            for (int i = 0; i < 100; i++) {
+                if (counter == 1) {
+                    for (int y = 0; y < c2; y++) {
+                        if (m1 != 0) {
+                            m2 += 1;
+                            m1 -= 1;
+                        } else {
+                            break;
+                        }
+                    }
+                } else if (counter == 2) {
+                    for (int j = 0; j < c3; j++) {
+                        if (m2 != 0) {
+                            m3 += 1;
+                            m2 -= 1;
+                        } else {
+                            break;
+                        }
+                    }
+                } else if (counter == 3) {
+                    for (int h = 0; h < c1; h++) {
+                        if (m3 != 0) {
+                            m1 += 1;
+                            m3 -= 1;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                counter += 1;
+                if (counter > 3) {
+                    counter = 1;
+                }
+            }
+            System.out.println(m1);
+            System.out.println(m2);
+            System.out.println(m3);
         }
-      }
-      else if(counter == 2){
-        for(int j =0 ; j < c3; j++){
-          if(m2 != 0){
-            m3 += 1;
-            m2 -= 1;
-          }
-          else{
-            break;
-          }
-        }
-      }
-      else if(counter == 3){
-       for(int h = 0; h < c1; h++){
-         if(m3 != 0){
-           m1 += 1;
-           m3 -= 1;
-          }
-          else{
-           break;
-          }
-        }
-      }
-      counter += 1;
-      if(counter > 3){
-        counter = 1;
-      }
     }
-    System.out.println(m1);
-    System.out.println(m2);
-    System.out.println(m3);
-  }
 }
