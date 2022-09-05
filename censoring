@@ -1,26 +1,43 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    String s = scan.nextLine();
-    String t = scan.nextLine();
-    String finalSent = "";
-    int counter = 0;
-    for(int i = 0; i < s.length(); i++){
-      for(int j = 0; j < t.length(); j++){
-        if(t.charAt(j) == s.charAt(i)){
-          continue;
+class censor {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("censor_bronze/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            String s = sc.nextLine();
+            String t = sc.nextLine();
+            String finalSent = "";
+            int counter = 0;
+            for (int i = 0; i < s.length(); i++) {
+                for (int j = 0; j < t.length(); j++) {
+                    if (t.charAt(j) == s.charAt(i)) {
+                        continue;
+                    } else {
+                        counter += 1;
+                    }
+                }
+                if (counter == t.length()) {
+                    finalSent += s.charAt(i);
+                }
+                counter = 0;
+            }
+            file = new File("censor_bronze/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            if(test.equals(finalSent)){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(finalSent);
+                //System.out.println(test);
+            }
         }
-        else{
-          counter += 1;
-        }
-      }
-      if(counter == t.length()){
-        finalSent += s.charAt(i);
-      }
-      counter = 0;
     }
-    System.out.println(finalSent);
-  }
 }
