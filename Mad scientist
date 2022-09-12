@@ -1,25 +1,43 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    String dummy = scan.nextLine();
-    String A = scan.nextLine();
-    String B = scan.nextLine();
-    int counter = 0;
-    int minimum = 0;
-    for(int i = 0; i < N; i++){
-      if(A.charAt(i) != B.charAt(i)){
-        counter += 1;
-      }
-      else{
-        counter = 0;
-      }
-      if(counter == 1){
-        minimum += 1;
-      }
+class science {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("breedflip_bronze_feb20/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            Scanner scan = new Scanner(System.in);
+            int N = Integer.parseInt(sc.nextLine());
+            String A = sc.nextLine();
+            String B = sc.nextLine();
+            int counter = 0;
+            int minimum = 0;
+            for (int i = 0; i < N; i++) {
+                if (A.charAt(i) != B.charAt(i)) {
+                    counter += 1;
+                } else {
+                    counter = 0;
+                }
+                if (counter == 1) {
+                    minimum += 1;
+                }
+            }
+            file = new File("breedflip_bronze_feb20/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            if(test1 == minimum){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(minimum);
+                System.out.println(test1);
+            }
+        }
     }
-    System.out.println(minimum);
-  }
 }
