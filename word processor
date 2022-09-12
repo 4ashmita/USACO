@@ -1,36 +1,43 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    int K = scan.nextInt();
-    String dummy = scan.nextLine();
-    String line = scan.nextLine();
-    String[] strArray = line.split(" ");
-    int counter = 0;
-    String ans = "";
-    String pseudo = strArray[strArray.length-1];
-    for(int i = 0; i < strArray.length; i++){
-      if(counter+(strArray[i].length()) <= K){
-        ans += strArray[i];
-        ans += " ";
-        counter += strArray[i].length();
-        if(i == strArray.length-1 && !ans.isEmpty()){
-          System.out.println(ans);
+class word {
+    public static void main(String[] args) throws FileNotFoundException {
+        for (int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("word_bronze_jan20/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            String[] ar = sc.nextLine().split(" ");
+            int N = Integer.parseInt(ar[0]);
+            int K = Integer.parseInt(ar[1]);
+            String line = sc.nextLine();
+            String[] strArray = line.split(" ");
+            int counter = 0;
+            String ans = "";
+            String pseudo = strArray[strArray.length - 1];
+            for (int i = 0; i < strArray.length; i++) {
+                if (counter + (strArray[i].length()) <= K) {
+                    ans += strArray[i];
+                    ans += " ";
+                    counter += strArray[i].length();
+                    if (i == strArray.length - 1 && !ans.isEmpty()) {
+                        System.out.println(ans);
+                    }
+                } else {
+                    System.out.println(ans);
+                    ans = "";
+                    ans += strArray[i];
+                    if (i == strArray.length - 1 && ans.equals(pseudo)) {
+                        System.out.println(ans);
+                    }
+
+                    ans += " ";
+                    counter = strArray[i].length();
+                }
+            }
         }
-      }
-      else{
-        System.out.println(ans);
-        ans = "";
-        ans += strArray[i];
-        if(i == strArray.length-1 && ans.equals(pseudo)){
-          System.out.println(ans);
-        }
-        
-        ans += " ";
-        counter = strArray[i].length();
-      }
     }
-  }
 }
