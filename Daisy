@@ -1,30 +1,53 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    int[] cows = new int[N];
-    for(int i = 0; i < N; i++){
-      cows[i] = scan.nextInt();
+class daisy {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("prob2_bronze_dec20/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            //Scanner scan = new Scanner(System.in);
+            int N = Integer.parseInt(sc.nextLine());
+            String[] dummy = sc.nextLine().split(" ");
+            int[] cows = new int[N];
+            for (int i = 0; i < N; i++) {
+                cows[i] = Integer.parseInt(dummy[i]);
+            }
+            int even = 0;
+            int odd = 0;
+            for (int i = 0; i < N; i++) {
+                if (cows[i] % 2 == 0) {
+                    even += 1;
+                } else {
+                    odd += 1;
+                }
+            }
+            while (odd > even) {
+                odd = odd - 2;
+                even++;
+            }
+            if (even > odd + 1) {
+                even = odd + 1;
+            }
+            file = new File("prob2_bronze_dec20/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            int answer = even+odd;
+            if(test1 == answer){
+                System.out.println("PASS");
+                System.out.println(answer);
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(answer);
+                System.out.println(test1);
+            }
+            //System.out.println(even + odd);
+        }
     }
-    int even = 0;
-    int odd = 0;
-    for(int i = 0; i < N; i++){
-      if(cows[i] %2 == 0){
-        even += 1;
-      }
-      else{
-        odd += 1;
-      }
-    }
-    while(odd > even){
-      odd = odd-2;
-      even++;
-    }
-    if(even > odd+1){
-      even = odd+1;
-    }
-    System.out.println(even+odd);
-  }
 }
