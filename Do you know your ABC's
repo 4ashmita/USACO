@@ -1,19 +1,42 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int[] mooZ = new int[7];
-    for(int i = 0; i < 7; i++){
-      mooZ[i] = scan.nextInt();
+class ABC {
+    public static void main(String[] args) throws FileNotFoundException {
+        for (int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("prob1_bronze_dec20/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            String[] dummy = sc.nextLine().split(" ");
+            int[] mooZ = new int[7];
+            for (int i = 0; i < 7; i++) {
+                mooZ[i] = Integer.parseInt(dummy[i]);
+            }
+            Arrays.sort(mooZ);
+            int a;
+            int b;
+            int c;
+            a = mooZ[0];
+            b = mooZ[1];
+            c = mooZ[6] - (a + b);
+            file = new File("prob1_bronze_dec20/" + outputFile);
+            sc = new Scanner(file);
+            String[] test = sc.nextLine().split(" ");
+            int A1 = Integer.parseInt(test[0]);
+            int B1 = Integer.parseInt(test[1]);
+            int C1 = Integer.parseInt(test[2]);
+            if(A1 == a && B1 == b && C1 == c){
+                System.out.println("PASS");
+                //System.out.println(answer);
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(A1 + " " + B1 + " " + C1);
+                System.out.println(a + " " + b + " " + c);
+            }
+        }
     }
-    Arrays.sort(mooZ);
-    int a;
-    int b;
-    int c;
-    a = mooZ[0];
-    b = mooZ[1];
-    c = mooZ[6] - (a+b);
-    System.out.println(a + " " + b + " " + c);
-  }
 }
