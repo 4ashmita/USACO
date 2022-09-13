@@ -1,30 +1,51 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.lang.Math;
 
-class Main {
-  public static void main(String[] args) {
-    Scanner scan = new Scanner(System.in);
-    int N = scan.nextInt();
-    int[] X = new int[N];
-    int[] Y = new int[N];
-    for(int i = 0; i < N; i++){
-      X[i] = scan.nextInt();
-      Y[i] = scan.nextInt();
-    }
-    int ans = 0;
-    for(int i = 0; i < N; i++){
-      for(int j = 0; j < N; j++){
-        if(i == j || X[i] != X[j]){
-          continue;
+class triangles {
+    public static void main(String[] args) throws FileNotFoundException {
+        for(int l = 1; l <= 10; l++) {
+            String inputFile = String.valueOf(l) + "" + ".in";
+            String outputFile = String.valueOf(l) + "" + ".out";
+            File file = new File("triangles_bronze_feb20/" + inputFile);
+            Scanner sc = new Scanner(file);
+            sc.useDelimiter("\\z");
+            Scanner scan = new Scanner(System.in);
+            int N = Integer.parseInt(sc.nextLine());
+            int[] X = new int[N];
+            int[] Y = new int[N];
+            for (int i = 0; i < N; i++) {
+                String[] Dx = sc.nextLine().split(" ");
+                X[i] = Integer.parseInt(Dx[0]);
+                Y[i] = Integer.parseInt(Dx[1]);
+            }
+            int ans = 0;
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    if (i == j || X[i] != X[j]) {
+                        continue;
+                    }
+                    for (int h = 0; h < N; h++) {
+                        if (i == h || Y[i] != Y[h]) {
+                            continue;
+                        }
+                        Math.max(ans, (Math.abs(X[h] - X[i]) * Math.abs(Y[j] - Y[i])));
+                    }
+                }
+            }
+            file = new File("triangles_bronze_feb20/" + outputFile);
+            sc = new Scanner(file);
+            String test = sc.nextLine();
+            int test1 = Integer.parseInt(test);
+            if(test1 == ans){
+                System.out.println("PASS");
+            }
+            else{
+                System.out.println("FAIL");
+                System.out.println(ans);
+                System.out.println(test1);
+            }
         }
-        for(int h = 0; h < N; h++){
-          if(i == h || Y[i] != Y[h]){
-            continue;
-          }
-          Math.max(ans,(Math.abs(X[h]-X[i])*Math.abs(Y[j]-Y[i])));
-        }
-      }
     }
-    System.out.println(ans);
-  }
 }
