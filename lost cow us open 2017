@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class lost {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int x = scan.nextInt();
+        int y = scan.nextInt();
+        int ans = 0;
+        int move = 1;
+        int direct = 1;
+        boolean Continue = true;
+        while(Continue == true){
+            if((direct == 1 &&  x<= y && y <= x+move) || (direct == -1 && x-move <= y && y <= x)){
+                ans += Math.abs(y-x);
+                Continue = false;
+            }
+            else{
+                ans += 2*move;
+                move *= 2;
+                direct *= -1;
+            }
+        }
+        System.out.println(ans);
+    }
+}
