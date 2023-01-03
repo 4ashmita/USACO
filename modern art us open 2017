@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class art {
+    public static boolean appear(int c, int[][] canvas, int N){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(canvas[i][j] == c){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean onTop(int c1, int c2, int[][] canvas, int N){
+        int top = N;
+        int bottom = 0;
+        int left = N;
+        int right = 0;
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(canvas[i][j] == c2){
+                    top = Math.min(top,i);
+                    bottom = Math.max(bottom,i);
+                    left = Math.min(left,j);
+                    right = Math.max(right,j);
+                }
+            }
+        }
+        for(int i = top; i <= bottom; i++){
+            for(int j = left; j <= right; j++){
+                if(canvas[i][j] == c1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[][] canvas = new int[N][N];
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                canvas[i][j] = scan.nextInt();
+            }
+        }
+        int counter = 0;
+        for(int i = 1; i <= 9; i++){
+            if(appear(i,canvas,N)){
+                boolean first = true;
+                for(int j = 1; j <= 9; j++){
+                    if(j != i && appear(j,canvas,N) && onTop(i,j,canvas,N)){
+                        first = false;
+                    }
+                }
+                if(first == true){
+                    counter+= 1;
+                }
+            }
+        }
+        System.out.println(counter);
+    }
+}
