@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class furniture {
+    static Set<String>[] rows1, rows2;
+    static int N;
+    public static void dfs(char[][] grid, int x, int y, Set<String>[] sets, String curr){
+        if(x+y == N-1){
+            sets[x].add(curr + grid[x][y]);
+        }else{
+            dfs(grid, x+1, y, sets, curr + grid[x][y]);
+            dfs(grid, x, y+1, sets, curr + grid[x][y]);
+        }
+    }
+    public static void transpose(char[][] board){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                if(i+j >= N-1){
+                    continue;
+                }
+                char t = board[i][j];
+                board[i][j] = board[N-1-j][N-1-i];
+                board[N-1-j][N-1-i] = t;
+            }
+        }
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        N = scan.nextInt();
+        char[][] board=  new char[N][N];
+        String dummy = scan.nextLine();
+        rows1 = new HashSet[N];
+        rows2 = new HashSet[N];
+        for(int i = 0; i < N; i++){
+            rows1[i] = new HashSet<String>();
+            rows2[i] = new HashSet<String>();
+        }
+        for(int i = 0; i < N; i++){
+            dummy = scan.nextLine();
+            for(int j = 0; j < N; j++){
+                board[i][j] = dummy.charAt(j);
+            }
+        }
+        dfs(board,0,0,rows1,"");
+        transpose(board);
+        dfs(board,0,0,rows2,"");
+        Set<String> ans = new HashSet<String>();
+        for(int i = 0; i < N; i++){
+            for(String s:rows1[i]){
+                if(rows2[i].contains(s)){
+                    ans.add(s);
+                }
+            }
+        }
+        System.out.println(ans.size());
+    }
+}
