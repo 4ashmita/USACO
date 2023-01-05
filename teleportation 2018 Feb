@@ -1,0 +1,16 @@
+import java.util.*;
+
+public class teleport {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int start = scan.nextInt();
+        int end = scan.nextInt();
+        int Tstart = scan.nextInt();
+        int Tend = scan.nextInt();
+        int ans = Integer.MAX_VALUE;
+        ans = Math.min(ans,Math.abs(end-start));
+        ans = Math.min(ans, Math.abs(start-Tstart) + Math.abs(end-Tend));
+        ans = Math.min(ans,Math.abs(start-Tend) + Math.abs(Tstart-end));
+        System.out.println(ans);
+    }
+}
