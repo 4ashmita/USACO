@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class swap {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int K = scan.nextInt();
+        int A1 = scan.nextInt();
+        int A2 = scan.nextInt();
+        int B1 = scan.nextInt();
+        int B2 = scan.nextInt();
+        int[] cows = new int[N];
+        for(int i = 0; i < N; i++){
+            cows[i] = i+1;
+        }
+        int Acounter = A1-1;
+        int Bcounter = B1-1;
+        int[] ans = new int[N];
+        for(int i = 0; i < N; i++){
+            ans[i] = cows[i];
+        }
+        for(int i = 0; i < K; i++){
+            int temp;
+            Acounter = A1-1;
+            Bcounter = B1-1;
+            for(int a = A2-1; a >= A1-1; a--){
+                ans[Acounter] = cows[a];
+                Acounter += 1;
+            }
+            for(int j = 0; j < N; j++){
+                cows[j] = ans[j];
+            }
+            for(int b = B2-1; b >= B1-1; b--){
+                ans[Bcounter] = cows[b];
+                Bcounter += 1;
+            }
+            for(int j = 0; j < N; j++){
+                cows[j] = ans[j];
+            }
+
+        }
+        for(int i:cows){
+            System.out.println(i);
+        }
+    }
+}
