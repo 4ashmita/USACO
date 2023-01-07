@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class factory {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[] outgoing = new int[101];
+        int[] incoming = new int[101];
+        for(int i = 0; i < N-1; i++){
+            int a = scan.nextInt();
+            int b = scan.nextInt();
+            outgoing[a] += 1;
+            incoming[b] += 1;
+        }
+        int answer = -1;
+        for (int i=1; i<=N; i++) {
+            if (outgoing[i]==0 && answer != -1 ) {
+                answer = -1;
+                break;
+            }
+            if (outgoing[i]==0) {
+                answer = i;
+            }
+        }
+        System.out.println(answer);
+    }
+}
