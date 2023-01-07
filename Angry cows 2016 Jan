@@ -1,0 +1,80 @@
+import java.util.*;
+
+public class angry {
+    static int N;
+    static int[] cows;
+    public static boolean check(int c){
+        for(int i = 0; i < N; i++){
+            if(cows[i] == c){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static int count(int start){
+        boolean Lc = true;
+        int Lradius = 1;
+        int Rradius = 1;
+        int counter = 1;
+        int top = start;
+        int bottom = start;
+        while(Lc == true){
+            for(int b = bottom-1; b >= bottom-Lradius; b--){
+                if(check(b) == true){
+                    counter += 1;
+
+                }
+            }
+            boolean Lsame = false;
+            for(int b = bottom-1; b >= bottom-Lradius; b--){
+                if(check(b) == true){
+                    Lsame = true;
+                    break;
+                }
+            }
+            if(Lsame == false){
+                Lc = false;
+            }
+            Lradius += 1;
+            bottom -= Lradius;
+        }
+        boolean Rc = true;
+        while(Rc == true){
+            for(int t = top+1; t <= top+Rradius; t++){
+                if(check(t) == true){
+                    counter += 1;
+                }
+            }
+            boolean Rsame = false;
+            for(int t = top+1; t <= top+Rradius; t++){
+                if(check(t) == true){
+                    Rsame = true;
+                    break;
+                }
+            }
+            if(Rsame == false){
+                Rc = false;
+            }
+            Rradius += 1;
+            top += Rradius;
+        }
+        return counter;
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        N = scan.nextInt();
+        cows = new int[N];
+        for(int i = 0; i < N; i++){
+            cows[i] = scan.nextInt();
+        }
+        int g = 0;
+        int ans = 0;
+        Arrays.sort(cows);
+        for(int i= 0; i < N; i++){
+            g = count(cows[i]);
+            //System.out.println(cows[i] + " " + g);
+            ans = Math.max(g,ans);
+        }
+        System.out.println(ans);
+    }
+}
