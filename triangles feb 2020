@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class triangles {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[] X = new int[N];
+        int[] Y = new int[N];
+        for(int i = 0; i < N; i++){
+            X[i] = scan.nextInt();
+            Y[i] = scan.nextInt();
+        }
+        int ans = -1;
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+                for(int k = 0; k < N; k++){
+                    if(Y[i] == Y[j] && X[i] == X[k]){
+                        int area = Math.abs((X[j]-X[i])*(Y[k]-Y[i]));
+                        ans = Math.max(area,ans);
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
