@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class fence{
+    public static int angle(char letter){
+        if(letter == 'E'){
+            return 0;
+        }
+        if(letter == 'N'){
+            return 90;
+        }
+        if(letter == 'W'){
+            return 180;
+        }
+        if(letter == 'S'){
+            return 270;
+        }
+        return -1;
+    }
+    public static int change(char a, char b){
+        int angle1 = angle(a);
+        int angle2 = angle(b);
+        if(angle2 == (angle1+90)%360){
+            return 90;
+        }
+        else if(angle1 == angle2){
+            return 0;
+        }
+        else if(angle2 == (angle1+270)%360){
+            return -90;
+        }
+        else{
+            return -1;
+        }
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        String dummy = scan.nextLine();
+        for(int i = 0; i < N; i++){
+            String fence = scan.nextLine();
+            int change = 0;
+            for(int j = 0; j < fence.length(); j++){
+                change += change(fence.charAt(j), fence.charAt((j+1)%fence.length()));
+            }
+            if(change == 360){
+                System.out.println("CCW");
+            }
+            else{
+                System.out.println("CW");
+            }
+        }
+    }
+}
