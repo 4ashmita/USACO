@@ -1,0 +1,14 @@
+import java.util.*;
+
+public class painting {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int a = scan.nextInt();
+        int b = scan.nextInt();
+        int c = scan.nextInt();
+        int d = scan.nextInt();
+        int bottom = Math.min(a,c);
+        int top = Math.max(b,d);
+        System.out.println(top-bottom);
+    }
+}
