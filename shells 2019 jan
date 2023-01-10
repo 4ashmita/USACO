@@ -1,0 +1,33 @@
+import java.util.*;
+
+public class hps {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[] cupA = new int[N];
+        int[] cupB = new int[N];
+        int[] guess = new int[N];
+        for(int i = 0; i < N; i++){
+            cupA[i] = scan.nextInt();
+            cupB[i] = scan.nextInt();
+            guess[i] = scan.nextInt();
+        }
+        int counter = 0;
+        int ans = 0;
+        for(int i = 1; i <= 3; i++){
+            int[] swaps = {1,2,3};
+            for(int j = 0; j < N; j++){
+                int temp = swaps[cupA[j]-1];
+                swaps[cupA[j] - 1] = swaps[cupB[j]-1];
+                swaps[cupB[j]-1] = temp;
+                if(swaps[guess[j]-1] == i){
+                    counter += 1;
+                }
+            }
+            ans = Math.max(ans,counter);
+            counter = 0;
+        }
+
+        System.out.println(ans);
+    }
+}
