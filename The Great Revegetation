@@ -1,0 +1,37 @@
+import java.util.*;
+
+public class revegetation {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int M = scan.nextInt();
+        int[] A = new int[151];
+        int[] B = new int[151];
+        int[] G = new int[101];
+        for(int i = 0; i < M; i++){
+            A[i] = scan.nextInt();
+            B[i] = scan.nextInt();
+            if(A[i] > B[i]){
+                int temp = A[i];
+                A[i] = B[i];
+                B[i] = temp;
+            }
+        }
+        for(int i = 1; i <= N; i++){
+            int g;
+            for(g = 1; g <= 4; g++){
+                boolean ok = true;
+                for(int j = 0; j < M; j++){
+                    if(B[j] == i && G[A[j]] == g){
+                        ok = false;
+                    }
+                }
+                if(ok){
+                    break;
+                }
+            }
+            G[i] = g;
+            System.out.print(g);
+        }
+    }
+}
