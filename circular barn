@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class circularBarn {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[] A = new int[N];
+        for(int i = 0; i < N; i++){
+            A[i] = scan.nextInt();
+        }
+        int ans = N*N*100;
+        for(int u = 0; u < N; u++){
+            int dist = 0;
+            for(int o = 0; o < N; o++){
+                dist += o * A[(u+o)%N];
+            }
+            ans = Math.min(dist,ans);
+        }
+        System.out.println(ans);
+    }
+}
