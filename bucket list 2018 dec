@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class sleeping {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int[] S = new int[N];
+        int[] T = new int[N];
+        int[] B = new int[N];
+        for(int i = 0; i < N; i++){
+            S[i] = scan.nextInt();
+            T[i] = scan.nextInt();
+            B[i] = scan.nextInt();
+        }
+        int max_buckets = 0;
+        for (int time=1; time<=1000; time++) {
+            int buckets_at_this_time = 0;
+            for (int i=1; i<=N; i++) {
+                if (S[i] <= time && time <= T[i]) {
+                    buckets_at_this_time += B[i];
+                }
+            }
+            max_buckets = Math.max(max_buckets, buckets_at_this_time);
+        }
+        System.out.println(max_buckets);
+    }
+}
