@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class mixing {
+    static int[] c;
+    static int[] m;
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        c = new int[3];
+        m = new int[3];
+        c[0] = scan.nextInt();
+        m[0] = scan.nextInt();
+        c[1] = scan.nextInt();
+        m[1] = scan.nextInt();
+        c[2] = scan.nextInt();
+        m[2] = scan.nextInt();
+        for(int i = 0; i < 33; i++){
+            mix(0,1,1);
+            mix(1,2,2);
+            mix(2,0,0);
+        }
+        System.out.println(m[1]);
+        System.out.println(m[0]);
+        System.out.println(m[2]);
+    }
+    public static void mix (int i, int j, int k){
+        int am = Math.min(m[i], c[k] - m[j]);
+        m[i] -= am;
+        m[j] += am;
+    }
+}
