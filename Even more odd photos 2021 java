@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class photos {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int x;
+    int E = 0;
+    int O = 0;
+    for (int i=0; i<N; i++) {
+      x = scan.nextInt();
+      if (x % 2 == 0) {
+        E++;
+      }
+      else{
+        O++;
+      }
+    }
+    while(O > E){
+      O=O-2; 
+      E++;
+    }
+    if(E > O+1){
+      E = O+1;
+    }
+    System.out.println(E+O);
+  }
+}
