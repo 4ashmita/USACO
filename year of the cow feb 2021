@@ -1,0 +1,111 @@
+import java.util.*;
+
+class Main{
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    Hashtable<String, String> dict = new Hashtable<String,String>();
+    Hashtable<String, String> zodiac_dict = new Hashtable<String,String>();
+    String dum = scan.nextLine();
+    String[] zodiacs= {"Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat","Monkey","Rooster", "Dog","Pig","Rat"};
+    int counter = 0;
+    int nut = 0;
+    String sing;
+    int fat = 0;
+    String sentence;
+
+    for(int i = 0; i < N; i++){
+      sentence = scan.nextLine();
+      String[] words = sentence.split(" ");
+      zodiac_dict.put(words[0], words[4]);
+      if(words[3].equals("previous")){
+        if (dict.containsKey(words[7])) {
+          for(int l = 0; l < 11; l++){
+            if(zodiacs[l].equals(zodiac_dict.get(words[7]))){
+              nut = l;
+              break;
+            }
+          }
+          while(zodiacs[nut].equals(words[4]) == false){
+            counter += 1;
+            if(nut > 0){
+              nut -= 1;
+            }
+            else{
+              nut = 11;
+            }
+          }
+          fat = Integer.valueOf(dict.get(words[7]));
+          counter += fat;
+          System.out.println(counter);
+          sing = String.valueOf(counter);
+          dict.put(words[0], sing);
+          System.out.println(dict);
+          counter = 0;
+        } else {
+          for(int j = 11; j > 0; j--){
+            if(words[4].equals(zodiacs[j]) ){
+              break;
+            }
+            else{
+              counter += 1; 
+            }
+          }
+          counter += 1;
+          System.out.println(counter);
+          sing = String.valueOf(counter);
+          dict.put(words[0], sing);
+          System.out.println(dict);
+        }
+        counter = 0;
+      }
+      else if(words[3].equals("next")){
+        if (dict.containsKey(words[7])) {
+          for(int g = 0; g < 11; g++){
+            if(zodiacs[g].equals(zodiac_dict.get(words[7]))){
+              nut = g;
+              break;
+            }
+          }
+          while(zodiacs[nut].equals(words[4]) == false){
+            counter += 1;
+            if(nut < 11){
+              nut += 1;
+            }
+            else{
+              nut = 0;
+            }
+          }
+          fat = Integer.valueOf(dict.get(words[7]));
+          if(fat > counter){
+            counter = fat - counter;
+          }
+          else{
+            counter -= fat;
+          }
+          System.out.println(counter);
+          sing = String.valueOf(counter);
+          dict.put(words[0], sing);
+          System.out.println(dict);
+          counter = 0;
+        } else {
+          for(int j = 1; j < 11; j++){
+            if(words[4].equals(zodiacs[j])){
+              break;
+            }
+            else{
+              counter += 1; 
+            }
+          }
+          counter += 1;
+          System.out.println(counter);
+          sing = String.valueOf(counter);
+          dict.put(words[0], sing);
+          System.out.println(dict);
+        }
+        counter = 0;
+      }
+    }
+    System.out.println(dict.get("Elsie"));    
+  }
+}
