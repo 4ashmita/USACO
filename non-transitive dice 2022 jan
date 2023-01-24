@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] A = new int[4];
+    int [] B = new int[4];
+    int[] C = new int[4];
+    for(int i = 0; i < N; i++){
+      for(int j = 0 ; j < 4; j++){
+        A[j] = scan.nextInt();
+      }
+      for(int h = 0 ; h < 4; h++){
+        B[h] = scan.nextInt();
+      }
+      for(int k = 0; k < 4; k++){
+        for(int l = 0; l < 4; l++){
+          if(A[k] > B[l]){
+            for(int num = 1; num <= 10; num++){
+              if(B[l] > num && num > A[k]){
+                C[k] = num;  
+                System.out.println(num);
+              }
+            }
+          }
+        }
+      }
+      boolean correct = false;
+      for(int Anum = 0; Anum < 4; Anum++){
+        for(int Bnum = 0; Bnum < 4; Bnum++){
+          for(int Cnum = 0; Cnum < 4; Cnum ++){
+            if(A[Anum] > B[Bnum] && B[Bnum] > C[Cnum] && C[Cnum] > A[Anum]){
+              correct = true;
+            }
+            else{
+              correct = false;
+            }
+          }
+        }
+      }
+      if(correct == true){
+        System.out.println("yes");
+      } 
+      else{
+        System.out.println("no");
+      }
+    }
+  }
+}
