@@ -1,0 +1,27 @@
+import java.util.*;
+
+class stalling {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    int N = scan.nextInt();
+    int[] cowH = new int[N];
+    int[] barnH = new int[N];
+    for(int i = 0; i < N ; i++){
+      cowH[i] = scan.nextInt();
+    }
+    for(int i = 0; i < N ; i++){
+      barnH[i] = scan.nextInt();
+    }
+    Arrays.sort(cowH);
+    int counter = 0;
+    int H = N/2;
+    for(int i = 0; i < N/2; i++){
+      for(int j = 0; j < N; j++){
+        if(cowH[i] <= barnH[j]){
+          counter += 1;
+        }
+      }
+    }
+    System.out.println(counter);
+  }
+}
