@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class Zodiac {
+    static int[][] pos;
+    static int N;
+    public static boolean check(int x, int y){
+        for(int i = 0; i < N; i++){
+            if(pos[i][0] == x && pos[i][1] == y){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean comfortable(int x, int y){
+        int counter = 1;
+        if(check(x+1,y)){
+            counter += 1;
+        }
+        if(check(x+2,y)){
+            counter += 1;
+        }
+        if(check(x-1,y)){
+            counter += 1;
+        }
+        if(check(x-2,y)){
+            counter += 1;
+        }
+        if(check(x,y+1)){
+            counter += 1;
+        }
+        if(check(x,y+2)){
+            counter += 1;
+        }
+        if(check(x,y-1)){
+            counter += 1;
+        }
+        if(check(x,y-2)){
+            counter += 1;
+        }
+        if(counter == 3){
+            return true;
+        }
+        return false;
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        N = scan.nextInt();
+        pos = new int[N][2];
+        int counter = 0;
+        int[][] ans = new int[N][2];
+        for(int i = 0; i < N; i++){
+            pos[i][0] = scan.nextInt();
+            pos[i][1] = scan.nextInt();
+            for(int j = 0; j < i; j++){
+                if(comfortable(pos[j][0],pos[j][1]) == true){
+                    boolean notComfy = false;
+                    for(int k = 0; k < N; k++){
+                        if(ans[k][0] == pos[j][0] && ans[k][1] == pos[j][1]){
+                            notComfy = true;
+                            break;
+                        }
+                    }
+                    if(!notComfy){
+                        counter += 1;
+                        ans[i][0] = pos[j][0];
+                        ans[i][1] = pos[j][1];
+                    }
+                    else{
+                        counter = 0;
+                    }
+                }
+            }
+            System.out.println(counter);
+            counter = 0;
+        }
+    }
+}
