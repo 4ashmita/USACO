@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class genomics {
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int K = scan.nextInt();
+        char[][] spotty = new char[N][K];
+        char[][] plain = new char[N][K];
+        String dummy = scan.nextLine();
+        for(int i = 0; i < N; i++){
+            String spot = scan.nextLine();
+            for(int j = 0; j < K; j++){
+                spotty[i][j] = spot.charAt(j);
+            }
+        }
+        for(int i = 0; i < N; i++){
+            String p = scan.nextLine();
+            for(int j = 0; j < K; j++){
+                plain[i][j] = p.charAt(j);
+            }
+        }
+        int counter1 = 0;
+        int counter2 = 0;
+        int ans = 0;
+        for(int i = 0; i < K; i++){
+            for(int j = 0; j < N; j++){
+                for(int t = 0; t < N; t++){
+                    if(spotty[j][i] != plain[t][i]){
+                        counter1 += 1;
+                    }
+                }
+                if(counter1 == N){
+                    counter2 += 1;
+                }
+                counter1 = 0;
+            }
+            if(counter2 == N){
+                ans += 1;
+            }
+            counter2 = 0;
+        }
+        System.out.println(ans);
+    }
+}
