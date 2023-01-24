@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class answer {
+    static int N;
+    static int inf = Integer.MAX_VALUE;
+
+    public static int cost(int[] h, int f){
+        int o = 0;
+        for(int i = 0; i < N-1; i++){
+            if(h[i] > f){
+                int sub = Math.min(h[i],h[i+1]) - f;
+                h[i] -= sub;
+                h[i+1] -= sub;
+                o += sub*2;
+            }
+        }
+        for(int i = 0; i < N-1; i++){
+            if(h[i] != h[i+1]){
+                return inf;
+            }
+        }
+        return o;
+    }
+    public static int exe(int[] h){
+        int mn = inf;
+        int ans = inf;
+        for(int i = 0; i <= mn; i++){
+            ans = Math.min(ans,cost(h,i));
+        }
+        if(ans == inf){
+            return -1;
+        }
+        return ans;
+    }
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int t = scan.nextInt();
+        while(t > 0){
+            N = scan.nextInt();
+            int[] h = new int[N];
+            for(int i = 0; i < N; i++){
+                h[i] = scan.nextInt();
+            }
+            System.out.println(exe(h));
+            t--;
+        }
+    }
+}
